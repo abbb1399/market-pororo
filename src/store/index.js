@@ -1,12 +1,11 @@
-import { createStore } from 'vuex'
+// import { createStore } from 'vuex'
 
-export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+// import foodModule from './modules/auth/index.js'
+
+// const store =  createStore({
+//   modules: {
+//     food: foodModule,
+//   }
+// })
+
+// export default store;

@@ -7,7 +7,7 @@
 
     <ul class="nav__items" :class="{ hide: !show }">
       <li>
-        <router-link to="/main">제품 목록</router-link>
+        <router-link to="/food">제품 목록</router-link>
       </li>
       <li>
         <router-link to="/cart">장바구니</router-link>
