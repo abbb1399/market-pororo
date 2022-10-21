@@ -2,7 +2,6 @@
   <nav class="nav">
     <h1 class="nav__brand">
       <router-link to="/" class="logo">Market Pororo</router-link>
-      <font-awesome-icon icon="bars" class="icon" @click="display" />
     </h1>
 
     <ul class="nav__items" :class="{ hide: !show }">
