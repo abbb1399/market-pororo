@@ -1,29 +1,55 @@
-T<template>
-  <li class="food-item" @click.once="toDetail">
-    <h4>{{name}}</h4>  
-    <h4>{{unitName}}</h4>  
-    <h4>{{unitPrice}}</h4>  
+<template>
+  <li class="food-item" @click="toCart" >
+    <base-card>
+      <h4>{{ name }}</h4>
+      <h4>{{ unitName }}</h4>
+      <h4>{{ unitPrice }}</h4>
+    </base-card>
   </li>
 </template>
 
 <script>
+import { toRefs } from "vue"
+import {useStore} from 'vuex'
+
 export default {
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     name: {
       type: String,
-      required: true
+      required: true,
     },
-    unitName:{
-      type:String,
-      required:true
+    unitName: {
+      type: String,
+      required: true,
     },
-    unitPrice:{
+    unitPrice: {
       type: Number,
-      required:true
-    }
+      required: true,
+    },
   },
-  setup() {
-   
+  setup(props) {
+    const store = useStore()
+    const { id, name, unitName, unitPrice } = toRefs(props)
+
+    const toCart = () =>{
+      const item = {
+        id: id.value,
+        name: name.value,
+        unitName: unitName.value,
+        unitPrice: unitPrice.value,
+        amount: 1
+      }
+
+      store.commit('addItem',item)
+    }
+
+    return{
+      toCart
+    }
 
   },
 }
@@ -36,15 +62,5 @@ export default {
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 1rem;
-
-  img {
-    width: 100%;
-    border-radius: 5px;
-    height: 10.6rem;
-  }
-
-  &__detail {
-    line-height: 1.6;
-  }
 }
 </style>

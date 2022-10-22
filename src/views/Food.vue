@@ -8,6 +8,7 @@
       <food-item
         v-for="food in foodList"
         :key="food.id"
+        :id="food.id"
         :name="food.name"
         :unit-name="food.unitName"
         :unit-price="food.unitPrice"
@@ -44,7 +45,7 @@ export default {
   max-width: 62.5rem;
   margin: 0 auto;
 
-  &__header{
+  &__header {
     text-align: center;
     margin-top: 2rem;
     margin-bottom: 3rem;

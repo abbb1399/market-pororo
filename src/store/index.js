@@ -1,11 +1,11 @@
-// import { createStore } from 'vuex'
+import { createStore } from "vuex"
 
-// import foodModule from './modules/auth/index.js'
+import foodModule from "./food/index.js"
 
-// const store =  createStore({
-//   modules: {
-//     food: foodModule,
-//   }
-// })
+const store = createStore({
+  modules: {
+    food: foodModule,
+  },
+})
 
-// export default store;
+export default store
