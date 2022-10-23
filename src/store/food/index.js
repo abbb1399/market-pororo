@@ -6,7 +6,8 @@ export default {
   state(){
     return{
       items:[],
-      totalAmount: 0
+      totalAmount: 0,
+      totalQuantity: 0
     }
   },
   mutations,

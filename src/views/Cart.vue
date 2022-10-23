@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { computed } from "vue"
+import { ref,computed } from "vue"
 import { useStore } from "vuex"
 
 import CartItem from "../components/cart/CartItem.vue"
@@ -44,6 +44,7 @@ export default {
   components: { CartItem },
   setup() {
     const store = useStore()
+    const totalCount = ref(0)
 
     const cartList = computed(() => {
       return store.getters.myItems
@@ -53,11 +54,10 @@ export default {
       return store.getters.getTotalAmount
     })
 
-    const totalCount = store.getters.myItems.reduce((curNumber, item) => {
+    totalCount.value = store.getters.myItems.reduce((curNumber, item) => {
       return curNumber + item.amount
     }, 0)
 
-    console.log(store.getters.myItems)
 
     return {
       cartList,
@@ -87,12 +87,13 @@ export default {
 
     .table-header {
       display: flex;
-      background: yellowgreen;
+      background: #ECECEC;
       font-weight: 700;
 
       span {
         text-align: center;
         flex: 1;
+        padding: .5rem;
       }
     }
 

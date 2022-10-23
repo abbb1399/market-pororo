@@ -3,11 +3,18 @@
     <span>{{ name }}</span>
     <span>{{ unitName }}</span>
     <span>{{ unitPrice }}</span>
-    <span>{{amount}}</span>
+    <span>
+      <button @click="subtractNum">-</button>
+      <input type="text" v-model="itemAmount" />
+      <button @click="addNum">+</button>
+    </span>
   </li>
 </template>
 
 <script>
+import { ref, toRefs } from "vue"
+import { useStore } from "vuex"
+
 export default {
   props: {
     id: {
@@ -28,28 +35,60 @@ export default {
     },
     amount: {
       type: Number,
+      required: true,
     },
   },
-  setup() {
+  setup(props) {
+    const store = useStore()
+    const itemAmount = ref(0)
+    const { id, name, unitName, unitPrice, amount } = toRefs(props)
 
- 
+    itemAmount.value = amount.value
 
-    return{
-    
+    const addNum = () => {
+      const item = {
+        id: id.value,
+        name: name.value,
+        unitName: unitName.value,
+        unitPrice: unitPrice.value,
+        amount: 1,
+      }
+
+      store.commit("addItem", item)
+      itemAmount.value += 1
+    }
+
+    const subtractNum = () => {
+      console.log(amount.value)
+
+      store.commit("removeItem",{id: id.value})
+      itemAmount.value -= 1
+    }
+
+    return {
+      itemAmount,
+      addNum,
+      subtractNum,
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.cart-item{
+.cart-item {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #ececec;
 
-  span{
+  span {
     text-align: center;
-    flex:1;
+    flex: 1;
+    padding: 0.5rem;
+
+    input {
+      width: 20%;
+      text-align: center;
+    }
   }
 }
 </style>

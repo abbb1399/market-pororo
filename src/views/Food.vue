@@ -31,8 +31,6 @@ export default {
       return items
     })
 
-    console.log(items)
-
     return {
       foodList,
     }
