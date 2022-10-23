@@ -5,7 +5,7 @@
         <h4>{{ name }}</h4>
         <h4>({{ unitName }})</h4>
       </div>
-      <h4 class="price">{{ unitPrice }}원</h4>
+      <h4 class="price">{{ unitPrice.toLocaleString('ko-KR') }}원</h4>
     </base-card>
   </li>
 </template>

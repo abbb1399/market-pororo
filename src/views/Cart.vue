@@ -49,7 +49,7 @@ export default {
     })
 
     const totalAmount = computed(() => {
-      return store.getters.getTotalAmount
+      return store.getters.getTotalAmount.toLocaleString('ko-KR')
     })
 
     const totalQuantity = computed(() => {

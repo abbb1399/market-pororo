@@ -2,7 +2,7 @@
   <li class="cart-item">
     <span>{{ name }}</span>
     <span>{{ unitName }}</span>
-    <span>{{ unitPrice }}</span>
+    <span>{{ unitPrice.toLocaleString('ko-KR') }}</span>
     <span class="cart-item__qunatity">
       <div class="quantity-input">
         <div class="wrapper">

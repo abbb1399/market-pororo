@@ -45,8 +45,7 @@ export default {
 
   &__header {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+    margin: 2rem 0;
   }
 
   &__list {
