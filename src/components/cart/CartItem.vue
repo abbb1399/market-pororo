@@ -69,14 +69,14 @@ export default {
     }
 
     const removeAll = () => {
-      store.commit("removeAll", { id: id.value})
+      store.commit("removeAll", { id: id.value })
     }
 
     return {
       itemAmount,
       addItem,
       removeItem,
-      removeAll
+      removeAll,
     }
   },
 }
