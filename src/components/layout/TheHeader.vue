@@ -2,13 +2,15 @@
   <nav class="nav">
     <h1 class="nav__brand">
       <router-link to="/" class="logo">Market Pororo</router-link>
+      <font-awesome-icon icon="bars" class="icon" @click="display" />
     </h1>
 
     <ul class="nav__items" :class="{ hide: !show }">
       <li>
         <router-link to="/food">제품 목록</router-link>
       </li>
-      <li>
+      <li :class="{ bump: bumpStatus }">
+        <div v-if="cartItemsCount > 0" :data-badge="cartItemsCount" />
         <router-link to="/cart">장바구니</router-link>
       </li>
     </ul>
@@ -16,28 +18,45 @@
 </template>
 
 <script>
-import { ref} from "vue"
-// import { useRouter } from "vue-router"
-// import { useStore } from "vuex"
+import { ref, computed, watch } from "vue"
+import { useStore } from "vuex"
 
 export default {
   setup() {
-    // const router = useRouter()
-    // const store = useStore()
+    const store = useStore()
     const show = ref(false)
+    const bumpStatus = ref(false)
 
-   
-   
+    const cartItemsCount = computed(() => {
+      return store.getters.getTotalQuantity
+    })
+
+    watch(cartItemsCount, (curValue, oldValue, onInvalidate) => {
+      if (curValue === 0) {
+        return
+      }
+
+      bumpStatus.value = true
+
+      const timer = setTimeout(() => {
+        bumpStatus.value = false
+      }, 300)
+
+      // 연속 클릭시 setTimeout 중첩 방지
+      onInvalidate(() => clearTimeout(timer))
+    })
 
     const display = () => {
       show.value = !show.value
     }
-    
+
     return {
       show,
+      bumpStatus,
+      cartItemsCount,
       display,
     }
-  }
+  },
 }
 </script>
 
@@ -88,32 +107,30 @@ export default {
     align-items: center;
 
     [data-badge] {
-      position:relative;     
+      position: relative;
       &:after {
-        position:absolute;
-        right: -0.625rem;
+        position: absolute;
+        right: -1rem;
         top: -0.5rem;
         line-height: 0.6;
         padding: 0.25rem;
 
-        background-color:#bf1f1f;
-        border:solid 1px #c93a3a;
+        background-color: #bf1f1f;
+        border: solid 1px #c93a3a;
 
         font-size: 0.625rem;
-        color:#fff;
+        color: #fff;
         border-radius: 30px;
-        content:attr(data-badge);
+        content: attr(data-badge);
 
-     
         @include respond(tab-port) {
-          right: -0.9rem;
+          right: -1.3rem;
         }
       }
-    }  
+    }
 
     & > li {
       padding: 0 0.625rem;
-     
 
       @include respond(tab-port) {
         margin-top: 10px;
@@ -133,15 +150,33 @@ export default {
         }
       }
     }
-
-    .avatar{
-      margin-left: .1rem ;
-    }
   }
 
   .hide {
     @include respond(tab-port) {
       display: none;
+    }
+  }
+
+  .bump {
+    animation: bump 300ms ease-out;
+  }
+
+  @keyframes bump {
+    0% {
+      transform: scale(1);
+    }
+    10% {
+      transform: scale(0.9);
+    }
+    30% {
+      transform: scale(1.1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }
