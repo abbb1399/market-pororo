@@ -6,12 +6,12 @@
     <span class="cart-item__qunatity">
       <div class="quantity-input">
         <div class="wrapper">
-          <font-awesome-icon class="btns" icon="minus" @click="subtractNum" />
+          <font-awesome-icon class="btns" icon="minus" @click="removeItem" />
           <p class="value">{{ itemAmount }}</p>
-          <font-awesome-icon class="btns" icon="plus" @click="addNum" />
+          <font-awesome-icon class="btns" icon="plus" @click="addItem" />
         </div>
       </div>
-      <font-awesome-icon class="x-btn" icon="x" @click="test" />
+      <font-awesome-icon class="x-btn" icon="x" @click="removeAll" />
     </span>
   </li>
 </template>
@@ -50,7 +50,7 @@ export default {
 
     itemAmount.value = parseInt(amount.value)
 
-    const addNum = () => {
+    const addItem = () => {
       const item = {
         id: id.value,
         name: name.value,
@@ -63,20 +63,20 @@ export default {
       itemAmount.value += 1
     }
 
-    const subtractNum = () => {
+    const removeItem = () => {
       store.commit("removeItem", { id: id.value, amount: 1 })
       itemAmount.value -= 1
     }
 
-    const test = () => {
+    const removeAll = () => {
       store.commit("removeAll", { id: id.value})
     }
 
     return {
       itemAmount,
-      addNum,
-      subtractNum,
-      test
+      addItem,
+      removeItem,
+      removeAll
     }
   },
 }

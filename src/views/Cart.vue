@@ -27,9 +27,8 @@
     </main>
 
     <footer class="cart__footer">
-      <span>총 주문 수량: {{ totalQuantity }}</span
-      >&nbsp;&nbsp;
-      <span>합계: {{ totalAmount }} 원</span>
+      <span><strong>총 주문 수량: {{ totalQuantity }} </strong></span>
+      <span><strong>합계: {{ totalAmount }} 원</strong></span>
     </footer>
   </section>
 </template>
@@ -57,8 +56,6 @@ export default {
       return store.getters.getTotalQuantity
     })
 
-
-
     return {
       cartList,
       totalAmount,
@@ -72,10 +69,6 @@ export default {
 .cart {
   max-width: 62.5rem;
   margin: 0 auto;
-  height: 35rem;
-
-  display: flex;
-  flex-direction: column;
 
   &__header {
     text-align: center;
@@ -83,26 +76,30 @@ export default {
   }
 
   &__main {
-    flex: 1;
-
     .table-header {
       display: flex;
-      background: #ECECEC;
+      background: #ececec;
       font-weight: 700;
 
       span {
         text-align: center;
         flex: 1;
-        padding: .5rem;
+        padding: 0.5rem;
       }
     }
 
     .table-body {
-    
+      max-height: 26rem;
+      overflow-y: auto;
     }
   }
 
   &__footer {
+    span:not(:first-child) {
+      margin-left: 2rem;
+    }
+
+    margin-top: 2.5rem;
     text-align: center;
   }
 }
