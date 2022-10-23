@@ -68,11 +68,7 @@ export default {
   padding: 1rem;
   border-bottom: 1px $light-color solid;
 
-  -ms-user-select: none;
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+  @include preventClick;
 
   @include respond(tab-port) {
     flex-direction: column;

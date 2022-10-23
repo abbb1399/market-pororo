@@ -58,11 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 .food-item {
-  -ms-user-select: none;
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
+  @include preventClick;
 
   &__card {
     cursor: pointer;
