@@ -27,7 +27,7 @@
     </main>
 
     <footer class="cart__footer">
-      <span>총 주문 수량: {{ totalCount }}</span
+      <span>총 주문 수량: {{ totalQuantity }}</span
       >&nbsp;&nbsp;
       <span>합계: {{ totalAmount }} 원</span>
     </footer>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { ref,computed } from "vue"
+import { computed } from "vue"
 import { useStore } from "vuex"
 
 import CartItem from "../components/cart/CartItem.vue"
@@ -44,7 +44,6 @@ export default {
   components: { CartItem },
   setup() {
     const store = useStore()
-    const totalCount = ref(0)
 
     const cartList = computed(() => {
       return store.getters.myItems
@@ -54,15 +53,16 @@ export default {
       return store.getters.getTotalAmount
     })
 
-    totalCount.value = store.getters.myItems.reduce((curNumber, item) => {
-      return curNumber + item.amount
-    }, 0)
+    const totalQuantity = computed(() => {
+      return store.getters.getTotalQuantity
+    })
+
 
 
     return {
       cartList,
       totalAmount,
-      totalCount,
+      totalQuantity,
     }
   },
 }

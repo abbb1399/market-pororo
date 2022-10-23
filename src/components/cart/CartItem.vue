@@ -59,9 +59,7 @@ export default {
     }
 
     const subtractNum = () => {
-      console.log(amount.value)
-
-      store.commit("removeItem",{id: id.value})
+      store.commit("removeItem",{id: id.value, amount: 1})
       itemAmount.value -= 1
     }
 

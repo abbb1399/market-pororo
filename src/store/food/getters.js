@@ -4,5 +4,8 @@ export default {
   },
   getTotalAmount(state){
     return state.totalAmount
+  },
+  getTotalQuantity(state){
+    return state.totalQuantity
   }
 }
