@@ -44,5 +44,18 @@ export default {
     state.items = updatedItems
     state.totalAmount = updatedTotalAmount
     state.totalQuantity = updatedTotalQuantity
+  },
+
+  removeAll(state, {id}){
+    const existingCartItemIndex = state.items.findIndex((item) => item.id === id)
+    const existingItem = state.items[existingCartItemIndex]
+
+    const updatedTotalQuantity = state.totalQuantity - existingItem.amount
+    const updatedTotalAmount = state.totalAmount - (existingItem.unitPrice * existingItem.amount)
+    const updatedItems = state.items.filter(item => item.id !== id)
+
+    state.items = updatedItems
+    state.totalAmount = updatedTotalAmount
+    state.totalQuantity = updatedTotalQuantity
   }
 }

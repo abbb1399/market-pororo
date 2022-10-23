@@ -3,10 +3,15 @@
     <span>{{ name }}</span>
     <span>{{ unitName }}</span>
     <span>{{ unitPrice }}</span>
-    <span>
-      <button @click="subtractNum">-</button>
-      <span>{{itemAmount}} </span>
-      <font-awesome-icon icon="plus" />
+    <span class="cart-item__qunatity">
+      <div class="quantity-input">
+        <div class="wrapper">
+          <font-awesome-icon class="btns" icon="minus" @click="subtractNum" />
+          <p class="value">{{ itemAmount }}</p>
+          <font-awesome-icon class="btns" icon="plus" @click="addNum" />
+        </div>
+      </div>
+      <font-awesome-icon class="x-btn" icon="x" @click="test" />
     </span>
   </li>
 </template>
@@ -43,7 +48,7 @@ export default {
     const itemAmount = ref(0)
     const { id, name, unitName, unitPrice, amount } = toRefs(props)
 
-    itemAmount.value = parseInt(amount.value) 
+    itemAmount.value = parseInt(amount.value)
 
     const addNum = () => {
       const item = {
@@ -59,14 +64,19 @@ export default {
     }
 
     const subtractNum = () => {
-      store.commit("removeItem",{id: id.value, amount: 1})
+      store.commit("removeItem", { id: id.value, amount: 1 })
       itemAmount.value -= 1
+    }
+
+    const test = () => {
+      store.commit("removeAll", { id: id.value})
     }
 
     return {
       itemAmount,
       addNum,
       subtractNum,
+      test
     }
   },
 }
@@ -78,15 +88,48 @@ export default {
   align-items: center;
   border-bottom: 1px solid #ececec;
 
+  &__qunatity {
+    display: flex;
+    align-items: center;
+
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    .quantity-input {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+
+      .wrapper {
+        display: flex;
+        align-items: center;
+        border: 2px solid #ececec;
+        border-radius: 5px;
+
+        .btns {
+          cursor: pointer;
+          padding: 5px;
+        }
+
+        .value {
+          padding: 0 1rem;
+        }
+      }
+    }
+
+    .x-btn {
+      cursor: pointer;
+      padding: 5px 0;
+    }
+  }
+
   span {
     text-align: center;
     flex: 1;
     padding: 0.5rem;
-
-    input {
-      width: 20%;
-      text-align: center;
-    }
   }
 }
 </style>

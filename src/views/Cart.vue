@@ -72,7 +72,7 @@ export default {
 .cart {
   max-width: 62.5rem;
   margin: 0 auto;
-  height: 80vh;
+  height: 35rem;
 
   display: flex;
   flex-direction: column;
