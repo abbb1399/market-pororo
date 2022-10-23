@@ -24,6 +24,7 @@ export default {
     state.totalAmount = updatedTotalAmount
     state.totalQuantity = updatedTotalQuantity
   },
+
   removeItem(state, {id, amount}){
     const existingCartItemIndex = state.items.findIndex((item) => item.id === id)
     const updatedTotalQuantity = state.totalQuantity - amount

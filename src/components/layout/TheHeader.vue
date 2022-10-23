@@ -44,9 +44,9 @@ export default {
 <style lang="scss" scoped>
 .nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding: 1rem 9.5rem;
+  padding: 1rem;
   border-bottom: 1px $light-color solid;
 
   -ms-user-select: none;

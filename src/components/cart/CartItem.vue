@@ -5,8 +5,8 @@
     <span>{{ unitPrice }}</span>
     <span>
       <button @click="subtractNum">-</button>
-      <input type="text" v-model="itemAmount" />
-      <button @click="addNum">+</button>
+      <span>{{itemAmount}} </span>
+      <font-awesome-icon icon="plus" />
     </span>
   </li>
 </template>
@@ -43,7 +43,7 @@ export default {
     const itemAmount = ref(0)
     const { id, name, unitName, unitPrice, amount } = toRefs(props)
 
-    itemAmount.value = amount.value
+    itemAmount.value = parseInt(amount.value) 
 
     const addNum = () => {
       const item = {
