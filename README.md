@@ -9,6 +9,7 @@
 * 프론트엔드 프레임워크: Vue.js
   * Vue 3
   * Composition API
+  * vuex, vue-router
 
 ## 실행법
 
