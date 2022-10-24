@@ -1,4 +1,4 @@
-# Marekt Pororo
+# Market Pororo
 
 제품을 클릭하여 장바구니에 찜할수 있습니다.<br>
 실시간으로 장바구니에 추가되는 것을 CSS animation으로 시각적으로 나타내었습니다.<br>
