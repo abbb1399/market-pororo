@@ -6,7 +6,7 @@ const getFood = (items) =>{
       }
 
       resolve(items)
-    }, 1000);
+    }, 500);
   })
 }
 
