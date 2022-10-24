@@ -1,24 +1,27 @@
 <template>
   <section class="food">
-    <header class="food__header">
-      <h1>제품 목록</h1>
-    </header>
+    <base-spinner v-if="loadingStatus" />
+    <div v-else>
+      <header class="food__header">
+        <h1>제품 목록</h1>
+      </header>
 
-    <ul class="food__list">
-      <food-item
-        v-for="food in foodList"
-        :key="food.id"
-        :id="food.id"
-        :name="food.name"
-        :unit-name="food.unitName"
-        :unit-price="food.unitPrice"
-      />
-    </ul>
+      <ul class="food__list">
+        <food-item
+          v-for="food in foodList"
+          :key="food.id"
+          :id="food.id"
+          :name="food.name"
+          :unit-name="food.unitName"
+          :unit-price="food.unitPrice"
+        />
+      </ul>
+    </div>
   </section>
 </template>
 
 <script>
-import { computed } from "vue"
+import { ref, computed } from "vue"
 import { useStore } from "vuex"
 
 import FoodItem from "../components/food/FoodItem.vue"
@@ -28,18 +31,21 @@ export default {
 
   setup() {
     const store = useStore()
+    const loadingStatus = ref(true)
 
     const foodList = computed(() => {
       return store.getters["food/getFoodList"]
     })
 
-    const init = async () =>{
-      await store.dispatch("food/fetchFoodList")  
+    const init = async () => {
+      await store.dispatch("food/fetchFoodList")
+      loadingStatus.value = false
     }
 
     init()
 
     return {
+      loadingStatus,
       foodList,
     }
   },
