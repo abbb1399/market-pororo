@@ -1,10 +1,12 @@
 import { createStore } from "vuex"
 
-import cartModule from "./cart/index.js"
+import cartModule from "./modules/cart/index.js"
+import foodModule from "./modules/food/index"
 
 const store = createStore({
   modules: {
     cart: cartModule,
+    food: foodModule,
   },
 })
 

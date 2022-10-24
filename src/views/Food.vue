@@ -19,17 +19,25 @@
 
 <script>
 import { computed } from "vue"
+import { useStore } from "vuex"
 
 import FoodItem from "../components/food/FoodItem.vue"
-import items from "../data/items.json"
 
 export default {
   components: { FoodItem },
 
   setup() {
+    const store = useStore()
+
     const foodList = computed(() => {
-      return items
+      return store.getters["food/getFoodList"]
     })
+
+    const init = async () =>{
+      await store.dispatch("food/fetchFoodList")  
+    }
+
+    init()
 
     return {
       foodList,
